@@ -1,0 +1,10 @@
+[
+  {
+    "name": "snapshot01",
+    "number": 1,
+    "message": "Starter HTML page with a text input",
+    "files": [
+      "index.html"
+    ]
+  }
+]
