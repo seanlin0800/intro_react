@@ -46,5 +46,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot07",
+    "number": 7,
+    "message": "Component lifecycle - 1",
+    "files": [
+      "index.html"
+    ]
   }
 ]
