@@ -3,6 +3,7 @@
     <meta charset="utf-8">
     <title>React Example</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
     <script src="https://fb.me/react-0.13.3.js"></script>
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
   </head>
@@ -26,10 +27,15 @@
           var createItem = function(name, index) {
             return (
               <li className="list-group-item" key={index}>
-                <NameItem name={name} />
+                <NameItem name={name} />&nbsp;
+                <button
+                  onClick={this.props.remove.bind(null, index)}
+                  className="btn btn-danger">
+                  Remove
+                </button>
               </li>
             );
-          };
+          }.bind(this);
           return (
             <ul className="list-group">
               {this.props.names.map(createItem)}
@@ -76,11 +82,19 @@
           this.setState({names: nameList});
         },
 
+        _removeName: function(id) {
+          var nameList = _.clone(this.state.names, true);
+          nameList.splice(id, 1);
+          this.setState({names: nameList});
+        },
+
         render: function() {
           return (
             <div className="row">
               <NameForm submitHandler={this._addNewName} />
-              <NameList names={this.state.names} />
+              <NameList
+                names={this.state.names}
+                remove={this._removeName} />
             </div>
           );
         }

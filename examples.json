@@ -70,5 +70,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot10",
+    "number": 10,
+    "message": "Removing entries from a list",
+    "files": [
+      "index.html"
+    ]
   }
 ]
