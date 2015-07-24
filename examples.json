@@ -38,5 +38,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot06",
+    "number": 6,
+    "message": "Passing values from parent to children",
+    "files": [
+      "index.html"
+    ]
   }
 ]

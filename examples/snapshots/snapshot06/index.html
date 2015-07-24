@@ -1,0 +1,48 @@
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>React Example</title>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  </head>
+  <body>
+    <div id="app">
+    </div>
+
+    <script type="text/jsx">
+      var DateWidget = React.createClass({
+        render: function() {
+          return (
+            <div>
+              Current Time: {this.props.date.toLocaleString()}
+            </div>
+          );
+        }
+      });
+
+      var Hello = React.createClass({
+        getInitialState: function() {
+          return {name: ''};
+        },
+
+        _onkeyup: function() {
+          var text = React.findDOMNode(this.refs.name).value;
+          this.setState({name: text});
+        },
+
+        render: function() {
+          return (
+            <div>
+              Name:<input type="text" ref="name" onKeyUp={this._onkeyup} />
+              <br />
+              Hello {this.state.name}!
+              <DateWidget date={new Date()} />
+            </div>
+          );
+        }
+      });
+
+      React.render(<Hello />, document.getElementById('app'));
+    </script>
+  </body>
+</html>
