@@ -1,0 +1,32 @@
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>React Example</title>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  </head>
+  <body>
+    <div id="app">
+    </div>
+
+    <script type="text/jsx">
+      var Hello = React.createClass({
+        _onkeyup: function() {
+          console.log('Got keyup event.');
+        },
+
+        render: function() {
+          return (
+            <div>
+              Name:<input type="text" onKeyUp={this._onkeyup} />
+              <br />
+              Hello world!
+            </div>
+          );
+        }
+      });
+
+      React.render(<Hello />, document.getElementById('app'));
+    </script>
+  </body>
+</html>

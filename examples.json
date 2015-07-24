@@ -6,5 +6,29 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot02",
+    "number": 2,
+    "message": "Starter HTML page in React",
+    "files": [
+      "index.html"
+    ]
+  },
+  {
+    "name": "snapshot03",
+    "number": 3,
+    "message": "Adding keyup event handler",
+    "files": [
+      "index.html"
+    ]
+  },
+  {
+    "name": "snapshot04",
+    "number": 4,
+    "message": "Extracting text from the text input as it changes",
+    "files": [
+      "index.html"
+    ]
   }
 ]
