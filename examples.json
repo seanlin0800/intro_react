@@ -62,5 +62,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot09",
+    "number": 9,
+    "message": "Adding entries to a list",
+    "files": [
+      "index.html"
+    ]
   }
 ]

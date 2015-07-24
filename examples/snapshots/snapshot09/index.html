@@ -38,6 +38,29 @@
         }
       });
 
+      var NameForm = React.createClass({
+        _onSubmit: function(e) {
+          e.preventDefault();
+          var name = React.findDOMNode(this.refs.name).value.trim();
+          if (!name) {
+            return;
+          }
+          this.props.submitHandler(name);
+
+          React.findDOMNode(this.refs.name).value = '';
+          return;
+        },
+
+        render: function() {
+          return (
+            <form onSubmit={this._onSubmit}>
+              <input type="text" ref="name" />
+              <button type="submit" className="btn btn-default">Add</button>
+            </form>
+          );
+        }        
+      });
+
       var NameBox = React.createClass({
         getInitialState: function() {
           var nameList = [
@@ -47,9 +70,15 @@
           return {names: nameList};
         },
 
+        _addNewName: function(name) {
+          var nameList = this.state.names.concat([name]);
+          this.setState({names: nameList});
+        },
+
         render: function() {
           return (
             <div className="row">
+              <NameForm submitHandler={this._addNewName} />
               <NameList names={this.state.names} />
             </div>
           );
