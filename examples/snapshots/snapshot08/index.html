@@ -1,0 +1,62 @@
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>React Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  </head>
+  <body>
+    <div id="app" class="container">
+    </div>
+
+    <script type="text/jsx">
+      var NameItem = React.createClass({
+        render: function() {
+          return (
+            <span>
+              {this.props.name}
+            </span>
+          );
+        }
+      });
+
+      var NameList = React.createClass({
+        render: function() {
+          var createItem = function(name, index) {
+            return (
+              <li className="list-group-item" key={index}>
+                <NameItem name={name} />
+              </li>
+            );
+          };
+          return (
+            <ul className="list-group">
+              {this.props.names.map(createItem)}
+            </ul>
+          );
+        }
+      });
+
+      var NameBox = React.createClass({
+        getInitialState: function() {
+          var nameList = [
+            'Alice',
+            'Bob'
+          ];
+          return {names: nameList}
+        },
+
+        render: function() {
+          return (
+            <div className="row">
+              <NameList names={this.state.names} />
+            </div>
+          );
+        }
+      });
+
+      React.render(<NameBox />, document.getElementById('app'));
+    </script>
+  </body>
+</html>

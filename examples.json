@@ -54,5 +54,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot08",
+    "number": 8,
+    "message": "List rendering",
+    "files": [
+      "index.html"
+    ]
   }
 ]
