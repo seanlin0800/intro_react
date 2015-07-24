@@ -30,5 +30,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot05",
+    "number": 5,
+    "message": "Updating state while typing",
+    "files": [
+      "index.html"
+    ]
   }
 ]
