@@ -1,0 +1,25 @@
+.names-enter, 
+.names-leave
+{ 
+  -webkit-transition: 400ms linear all;
+  -moz-transition: 400ms linear all;
+  -ms-transition: 400ms linear all;
+  -o-transition: 400ms linear all;
+  transition: 400ms linear all;
+  position: relative;
+  display: block;
+} 
+ 
+.names-enter.names-enter-active, 
+.names-leave {
+  opacity: 1;
+  top: 0;
+  height: 56px;
+}
+ 
+.names-leave.names-leave-active,
+.names-enter {
+  opacity: 0;
+  top: -56px;
+  height: 0px;
+}

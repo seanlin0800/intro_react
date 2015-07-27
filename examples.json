@@ -78,5 +78,14 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot11",
+    "number": 11,
+    "message": "Playing with animations",
+    "files": [
+      "index.html",
+      "main.css"
+    ]
   }
 ]
