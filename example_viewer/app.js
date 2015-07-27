@@ -21,7 +21,7 @@ app.factory('examples', function($http){
     $http({
       method: 'GET',
       url: '../examples.json',
-      cache: true
+      cache: false
     }).success(callback);
   }
 
@@ -115,8 +115,13 @@ app.directive('file', function(){
     },
     link : function(scope, element, attrs) {
       var textArea = element[0];
+      var modeMap = {
+        js: 'text/typescript',
+        html: 'text/html',
+        css: 'text/css'
+      };
       var editor = CodeMirror.fromTextArea(textArea, {
-        mode: scope.file.split('.').pop() == 'js' ? 'text/typescript' : 'text/html',
+        mode: modeMap[scope.file.split('.').pop()],
         lineNumbers: true,
         viewportMargin: Infinity
       });
