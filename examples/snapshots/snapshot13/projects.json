@@ -1,0 +1,22 @@
+[
+    {
+        "name": "AngularJS",
+        "description": "HTML enhanced for web apps!"
+    },
+    {
+        "name": "Backbone",
+        "description": "Models for your apps."
+    },
+    {
+        "name": "Ember",
+        "description": "Ambitious web apps."
+    },
+    {
+        "name": "jQuery",
+        "description": "Write less, do more."
+    },
+    {
+        "name": "React",
+        "description": "Library for building user interfaces."
+    }
+]

@@ -87,5 +87,23 @@
       "index.html",
       "main.css"
     ]
+  },
+  {
+    "name": "snapshot12",
+    "number": 12,
+    "message": "Fetching data via AJAX",
+    "files": [
+      "index.html",
+      "projects.json"
+    ]
+  },
+  {
+    "name": "snapshot13",
+    "number": 13,
+    "message": "Instant search",
+    "files": [
+      "index.html",
+      "projects.json"
+    ]
   }
 ]

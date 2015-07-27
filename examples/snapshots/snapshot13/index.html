@@ -1,0 +1,107 @@
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>React Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  </head>
+  <body>
+    <div id="app" class="container">
+    </div>
+
+    <script type="text/jsx">
+      var ProjectList = React.createClass({
+        render: function() {
+          var createItem = function(project, index) {
+            return (
+              <li className="list-group-item" key={index}>
+                {project.name}&nbsp;-&nbsp;{project.description}
+              </li>
+            );
+          };
+
+          return (
+            <ul className="list-group">
+              {this.props.projects.map(createItem)}
+            </ul>
+          );
+        }
+      });
+
+      var Filter = React.createClass({
+        _handleChange: function(e) {
+          this.props.changeHandler(e.target.value);
+        },
+
+        render: function() {
+          return (
+            <div id="filter" className="input-group">
+              <span className="input-group-addon">
+                <i className="glyphicon glyphicon-search" />
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                ref="filterInput"
+                onChange={this._handleChange}
+                placeholder="Search for project name" />
+            </div>
+          );
+        }
+      });
+
+      var ProjectBox = React.createClass({
+        getInitialState: function() {
+          return {
+            projects: [],
+            searchText: ''
+          };
+        },
+
+        componentDidMount: function() {
+          $.ajax({
+            url: this.props.url,
+            dataType: 'json',
+            cache: false
+          }).done(this._onChange.bind(this));
+        },
+
+        _onChange: function(data) {
+          if (this.isMounted()) {
+            this.setState({projects: data});
+          }
+        },
+
+        _setFilter: function(text) {
+          this.setState({searchText: text.trim().toLowerCase()});
+        },
+
+        render: function() {
+          var searchText = this.state.searchText;
+          var projects = this.state.projects;
+
+          if (searchText) {
+            projects = this.state.projects.filter(function(project) {
+              return project.name.toLowerCase().indexOf(searchText) > -1;
+            });
+          }
+
+          return (
+            <div className="row">
+              <Filter changeHandler={this._setFilter} />
+              <ProjectList projects={projects} />
+            </div>
+          );
+        }
+      });
+
+      React.render(
+        <ProjectBox url="projects.json" />,
+        document.getElementById('app')
+      );
+    </script>
+  </body>
+</html>
