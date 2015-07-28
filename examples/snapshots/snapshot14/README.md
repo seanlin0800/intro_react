@@ -4,6 +4,6 @@ Key points:
 
  - react-router (v0.13.3)
  - Route
- - HashLocation
+ - RouteHandler
  - DefaultRoute
  - Link
