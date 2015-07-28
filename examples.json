@@ -113,5 +113,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot15",
+    "number": 15,
+    "message": "Adding animations to page transitions",
+    "files": [
+      "index.html"
+    ]
   }
 ]

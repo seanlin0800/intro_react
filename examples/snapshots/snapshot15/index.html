@@ -1,0 +1,79 @@
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>React Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.min.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/0.13.3/ReactRouter.min.js"></script>
+  </head>
+  <body>
+    <div id="app" class="container">
+    </div>
+
+    <script type="text/jsx">
+      var Route = ReactRouter.Route;
+      var DefaultRoute = ReactRouter.DefaultRoute;
+      var Link = ReactRouter.Link;
+      var CSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+      var App = React.createClass({
+        contextTypes: {
+          router: React.PropTypes.func
+        },
+
+        render: function() {
+          var name = this.context.router.getCurrentPath();
+
+          return (
+            <div>
+              <ul className="nav nav-pills">
+                <li role="presentation"><Link to="page1">Page 1</Link></li>
+                <li role="presentation"><Link to="page2">Page 2</Link></li>
+              </ul>
+              <CSSTransitionGroup
+                className="main"
+                component="div"
+                transitionName="example">
+                  <ReactRouter.RouteHandler key={name} />
+              </CSSTransitionGroup>
+            </div>
+          );
+        }
+      });
+
+      var Page1 = React.createClass({
+        render: function() {
+          return (
+            <div className="page">
+              <h1>Page 1</h1>
+            </div>
+          );
+        }
+      });
+
+      var Page2 = React.createClass({
+        render: function() {
+          return (
+            <div className="page">
+              <h1>Page 2</h1>
+            </div>
+          );
+        }
+      });
+
+      var routes = (
+        <Route name="app" path="/" handler={App}>
+          <Route name="page1" handler={Page1} />
+          <Route name="page2" handler={Page2} />
+          <DefaultRoute handler={Page1} />
+        </Route>
+      );
+
+      ReactRouter.run(routes, ReactRouter.HashLocation, function(Root) {
+        React.render(<Root/>, document.getElementById('app'));
+      });
+    </script>
+  </body>
+</html>
