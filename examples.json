@@ -121,5 +121,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot16",
+    "number": 16,
+    "message": "Using params to dynamically passing data",
+    "files": [
+      "index.html"
+    ]
   }
 ]
