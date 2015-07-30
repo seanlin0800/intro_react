@@ -1,0 +1,112 @@
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>React Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.min.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/0.13.3/ReactRouter.min.js"></script>
+  </head>
+  <body>
+    <div id="app" class="container">
+    </div>
+
+    <script type="text/jsx">
+      var Route = ReactRouter.Route;
+      var DefaultRoute = ReactRouter.DefaultRoute;
+      var Link = ReactRouter.Link;
+      var CSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+      var App = React.createClass({
+        mixins: [ReactRouter.State],
+
+        render: function() {
+          return (
+            <div>
+              <ul className="nav nav-pills">
+                <li role="presentation">
+                  <Link to="app">Home</Link>
+                </li>
+                <li role="presentation">
+                  <Link to="page" params={{pageId: 1}}>Page 1</Link>
+                </li>
+                <li role="presentation">
+                  <Link to="page" params={{pageId: 2}}>Page 2</Link>
+                </li>
+              </ul>
+              <CSSTransitionGroup
+                className="main"
+                component="div"
+                transitionName="example">
+                  <ReactRouter.RouteHandler key={this.getParams().pageId} />
+              </CSSTransitionGroup>
+            </div>
+          );
+        }
+      });
+
+      var Item = React.createClass({
+        mixins: [ReactRouter.State],
+
+        render: function() {
+          return (
+            <div className="well">
+              <div>Page: {this.getParams().pageId}</div>
+              <div>Item: {this.getParams().itemId}</div>
+            </div>
+          );
+        }
+      });
+
+      var Page = React.createClass({
+        mixins: [ReactRouter.State],
+
+        render: function() {
+          var pageId = this.getParams().pageId;
+          return (
+            <div className="page">
+              <h1>Page {pageId}</h1>
+              <ul>
+                <li>
+                  <Link to="item" params={{pageId: pageId, itemId: 1}}>
+                    Item 1
+                  </Link>
+                </li>
+                <li>
+                  <Link to="item" params={{pageId: pageId, itemId: 2}}>
+                    Item 2
+                  </Link>
+                </li>
+              </ul>
+              <ReactRouter.RouteHandler/>
+            </div>
+          );
+        }
+      });
+
+      var Home = React.createClass({
+        render: function() {
+          return (
+            <div className="page">
+              <h1>No page selected</h1>
+            </div>
+          );
+        }
+      });
+
+      var routes = (
+        <Route name="app" path="/" handler={App}>
+          <Route name="page" path="/page/:pageId" handler={Page}>
+            <Route name="item" path="items/:itemId" handler={Item} />
+          </Route>
+          <DefaultRoute handler={Home}/>
+        </Route>
+      );
+
+      ReactRouter.run(routes, ReactRouter.HashLocation, function(Root) {
+        React.render(<Root/>, document.getElementById('app'));
+      });
+    </script>
+  </body>
+</html>
