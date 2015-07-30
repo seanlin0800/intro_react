@@ -79,7 +79,7 @@
                   </Link>
                 </li>
               </ul>
-              <ReactRouter.RouteHandler/>
+              <ReactRouter.RouteHandler />
             </div>
           );
         }
@@ -100,7 +100,7 @@
           <Route name="page" path="/page/:pageId" handler={Page}>
             <Route name="item" path="items/:itemId" handler={Item} />
           </Route>
-          <DefaultRoute handler={Home}/>
+          <DefaultRoute handler={Home} />
         </Route>
       );
 
