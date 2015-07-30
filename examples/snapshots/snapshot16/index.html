@@ -19,13 +19,9 @@
       var CSSTransitionGroup = React.addons.CSSTransitionGroup;
 
       var App = React.createClass({
-        contextTypes: {
-          router: React.PropTypes.func
-        },
+        mixins: [ReactRouter.State],
 
         render: function() {
-          var name = this.context.router.getCurrentPath();
-
           return (
             <div>
               <ul className="nav nav-pills">
@@ -43,7 +39,7 @@
                 className="main"
                 component="div"
                 transitionName="example">
-                  <ReactRouter.RouteHandler key={name} />
+                  <ReactRouter.RouteHandler key={this.getParams().pageId} />
               </CSSTransitionGroup>
             </div>
           );
