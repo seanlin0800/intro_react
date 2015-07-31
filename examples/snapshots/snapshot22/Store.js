@@ -1,5 +1,6 @@
 var Store = (function() {
 
+  var CHANGE_EVENT = 'change';
   var _names = {};
 
   function create(name) {
@@ -11,17 +12,39 @@ var Store = (function() {
     };
   }
 
-  var Store = {
+  function remove(id) {
+    delete _names[id];
+  }
+
+  var Store = Object.assign({}, EventEmitter.prototype, {
     getAll: function() {
       return _names;
+    },
+
+    emitChange: function() {
+      this.emit(CHANGE_EVENT);
+    },
+
+    addChangeListener: function(callback) {
+      this.on(CHANGE_EVENT, callback);
+    },
+
+    removeChangeListener: function(callback) {
+      this.removeListener(CHANGE_EVENT, callback);
     }
-  };
+  });
 
   // Register callback to handle all updates
   Dispatcher.register(function(action) {
     switch(action.actionType) {
       case Constants.ADD_ITEM:
         create(action.data);
+        Store.emitChange();
+        break;
+
+      case Constants.REMOVE_ITEM:
+        remove(action.data);
+        Store.emitChange();
         break;
 
       default:

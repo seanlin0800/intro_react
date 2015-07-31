@@ -36,6 +36,8 @@ var Store = (function() {
       case Constants.ADD_ITEM:
         create(action.data);
         Store.emitChange();
+        break;
+
       default:
         // no-op
     }

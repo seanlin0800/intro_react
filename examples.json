@@ -183,5 +183,18 @@
       "Dispatcher.js",
       "Constants.js"
     ]
+  },
+  {
+    "name": "snapshot22",
+    "number": 22,
+    "message": "Keeping on adding new events",
+    "files": [
+      "index.html",
+      "NameBox.js",
+      "ActionCreator.js",
+      "Store.js",
+      "Dispatcher.js",
+      "Constants.js"
+    ]
   }
 ]
