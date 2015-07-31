@@ -157,5 +157,18 @@
       "Dispatcher.js",
       "Constants.js"
     ]
+  },
+  {
+    "name": "snapshot20",
+    "number": 20,
+    "message": "Stores to the rescue",
+    "files": [
+      "index.html",
+      "NameBox.js",
+      "ActionCreator.js",
+      "Store.js",
+      "Dispatcher.js",
+      "Constants.js"
+    ]
   }
 ]
