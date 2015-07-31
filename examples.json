@@ -145,5 +145,17 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot19",
+    "number": 19,
+    "message": "Getting started with flux",
+    "files": [
+      "index.html",
+      "NameBox.js",
+      "ActionCreator.js",
+      "Dispatcher.js",
+      "Constants.js"
+    ]
   }
 ]
