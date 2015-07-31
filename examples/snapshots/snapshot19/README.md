@@ -2,6 +2,7 @@ Getting started with flux
 
 Key points:
 
+ - flux is an architecture, not a framework
  - **unidirectional** data flow
  - Action creators
  - Dispatcher: a singleton
