@@ -137,5 +137,13 @@
     "files": [
       "index.html"
     ]
+  },
+  {
+    "name": "snapshot18",
+    "number": 18,
+    "message": "Making active navigation menu",
+    "files": [
+      "index.html"
+    ]
   }
 ]
