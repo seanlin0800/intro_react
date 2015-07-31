@@ -38,12 +38,12 @@
                 </button>
               </li>
             );
-          }.bind(this);
+          };
 
           return (
             <ul className="list-group">
               <CSSTransitionGroup transitionName="names">
-                {this.props.names.map(createItem)}
+                {this.props.names.map(createItem, this)}
               </CSSTransitionGroup>
             </ul>
           );

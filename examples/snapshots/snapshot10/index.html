@@ -35,11 +35,11 @@
                 </button>
               </li>
             );
-          }.bind(this);
+          };
 
           return (
             <ul className="list-group">
-              {this.props.names.map(createItem)}
+              {this.props.names.map(createItem, this)}
             </ul>
           );
         }
