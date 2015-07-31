@@ -170,5 +170,18 @@
       "Dispatcher.js",
       "Constants.js"
     ]
+  },
+  {
+    "name": "snapshot21",
+    "number": 21,
+    "message": "Listening to changes",
+    "files": [
+      "index.html",
+      "NameBox.js",
+      "ActionCreator.js",
+      "Store.js",
+      "Dispatcher.js",
+      "Constants.js"
+    ]
   }
 ]

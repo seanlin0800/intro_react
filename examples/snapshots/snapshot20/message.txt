@@ -1,1 +1,1 @@
-Getting started with flux
+Stores to the rescue
