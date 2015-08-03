@@ -9,6 +9,12 @@ Key points:
 
 After clicking the button, nothing will show up. Pay attention to the console. :)
 
-Here's a diagram of data flow:
+A simple flux flow:
 
-<img src="../examples/snapshots/snapshot19/flux.png">
+<img src="../examples/snapshots/snapshot19/flux-simple.png">
+
+A more complex flux flow:
+
+<img src="../examples/snapshots/snapshot19/flux-complex.png">
+
+(source: http://fluxxor.com/what-is-flux.html)
