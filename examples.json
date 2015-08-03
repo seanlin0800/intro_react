@@ -174,7 +174,7 @@
   {
     "name": "snapshot21",
     "number": 21,
-    "message": "Listening to changes",
+    "message": "Listening to store change events",
     "files": [
       "index.html",
       "NameBox.js",

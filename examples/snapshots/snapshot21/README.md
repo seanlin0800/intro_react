@@ -1,4 +1,4 @@
-Listening to changes
+Listening to store change events
 
 Key points:
 
