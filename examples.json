@@ -50,7 +50,7 @@
   {
     "name": "snapshot07",
     "number": 7,
-    "message": "Component lifecycle - 1",
+    "message": "Component lifecycle",
     "files": [
       "index.html"
     ]
