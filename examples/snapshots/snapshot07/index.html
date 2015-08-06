@@ -12,9 +12,17 @@
 
     <script type="text/jsx">
       var DateWidget = React.createClass({
+        getInitialState: function() {
+          return {color: this.props.initColor};
+        },
+
+        componentWillReceiveProps: function(nextProps) {
+          this.setState({color: nextProps.initColor});
+        },
+
         render: function() {
           return (
-            <div>
+            <div style={{color: this.state.color}}>
               Current Time: {this.props.date.toLocaleString()}
             </div>
           );
@@ -25,6 +33,7 @@
         getInitialState: function() {
           return {
             name: '',
+            color: 'red',
             date: new Date()
           };
         },
@@ -33,26 +42,50 @@
           this.interval = setInterval(this._tick, 1000);
         },
 
+        shouldComponentUpdate: function(nextProps, nextState) {
+          return nextState.name !== 'stop';
+        },
+
         componentWillUnmount: function() {
           clearInterval(this.interval);
         },
 
-        _onkeyup: function() {
+        _handleKeyUp: function() {
           var text = React.findDOMNode(this.refs.name).value;
           this.setState({name: text});
+        },
+
+        _handleChange: function(e) {
+          this.setState({color: e.target.value});
         },
 
         _tick: function() {
           this.setState({date: new Date()});
         },
 
+        _renderRadioGroup: function() {
+          return (
+            <div>
+              <input type="radio"
+               name="color"
+               value="red"
+               onChange={this._handleChange} />Red
+              <input type="radio"
+               name="color"
+               value="blue"
+               onChange={this._handleChange} />Blue
+            </div>
+          );
+        },
+
         render: function() {
           return (
             <div>
-              Name:<input type="text" ref="name" onKeyUp={this._onkeyup} />
+              {this._renderRadioGroup()}
+              Name:<input type="text" ref="name" onKeyUp={this._handleKeyUp} />
               <br />
               Hello {this.state.name}!
-              <DateWidget date={this.state.date} />
+              <DateWidget initColor={this.state.color} date={this.state.date} />
             </div>
           );
         }
