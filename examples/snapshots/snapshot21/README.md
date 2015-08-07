@@ -2,4 +2,9 @@ Listening to store change events
 
 Key points:
 
- - controller-views: listen to event changes and get data from stores
+ - Stores
+   - emit an event when state changed 
+ - Controller-views
+   - listen to event changes
+   - get data from stores
+   - pass data to children via props
