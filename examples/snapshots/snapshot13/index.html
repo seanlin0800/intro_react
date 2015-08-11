@@ -67,7 +67,7 @@
             url: this.props.url,
             dataType: 'json',
             cache: false
-          }).done(this._onChange.bind(this));
+          }).done(this._onChange);
         },
 
         _onChange: function(data) {
