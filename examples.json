@@ -196,5 +196,15 @@
       "Dispatcher.js",
       "Constants.js"
     ]
+  },
+  {
+    "name": "snapshot23",
+    "number": 23,
+    "message": "Unit testing",
+    "files": [
+      "index.html",
+      "NameBox.js",
+      "NameBox-test.js"
+    ]
   }
 ]
