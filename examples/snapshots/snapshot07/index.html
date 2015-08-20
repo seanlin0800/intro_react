@@ -3,89 +3,93 @@
   <head>
     <meta charset="utf-8">
     <title>React Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://fb.me/react-0.13.3.js"></script>
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
   </head>
   <body>
-    <div id="app">
+    <div id="app" class="container">
     </div>
 
     <script type="text/jsx">
       var DateWidget = React.createClass({
         getInitialState: function() {
-          return {color: this.props.initColor};
-        },
-
-        componentWillReceiveProps: function(nextProps) {
-          this.setState({color: nextProps.initColor});
-        },
-
-        render: function() {
-          return (
-            <div style={{color: this.state.color}}>
-              Current Time: {this.props.date.toLocaleString()}
-            </div>
-          );
-        }
-      });
-
-      var Hello = React.createClass({
-        getInitialState: function() {
-          return {
-            name: '',
-            color: 'red',
-            date: new Date()
-          };
+          return {date: new Date(), color: 'black'};
         },
 
         componentDidMount: function() {
           this.interval = setInterval(this._tick, 1000);
         },
 
+        componentWillReceiveProps: function(nextProps) {
+          var color = nextProps.count > this.props.count ? 'blue' : 'red';
+          this.setState({color: color});
+        },
+
         shouldComponentUpdate: function(nextProps, nextState) {
-          return nextState.name !== 'stop';
+          return nextProps.count >= 0;
         },
 
         componentWillUnmount: function() {
           clearInterval(this.interval);
         },
 
-        _handleKeyUp: function() {
-          var text = React.findDOMNode(this.refs.name).value;
-          this.setState({name: text});
-        },
-
-        _handleChange: function(e) {
-          this.setState({color: e.target.value});
-        },
-
         _tick: function() {
           this.setState({date: new Date()});
         },
 
-        _renderRadioGroup: function() {
+        render: function() {
           return (
-            <div>
-              <input type="radio"
-               name="color"
-               value="red"
-               onChange={this._handleChange} />Red
-              <input type="radio"
-               name="color"
-               value="blue"
-               onChange={this._handleChange} />Blue
+            <div style={{color: this.state.color}}>
+              Current Time: {this.state.date.toLocaleString()}
             </div>
           );
+        }
+      });
+
+      var Tool = React.createClass({
+        render: function() {
+          return (
+            <div>
+              <button className="btn btn-default" onClick={this.props.up}>
+                <span className="glyphicon glyphicon-thumbs-up" />
+              </button>
+              <button className="btn btn-default" onClick={this.props.down}>
+                <span className="glyphicon glyphicon-thumbs-down" />
+              </button>
+            </div>
+          );
+        }        
+      });
+
+      var Likes = React.createClass({
+        render: function() {
+          return (
+            <span className="badge">{this.props.count}</span>
+          );
+        }        
+      });
+
+      var Hello = React.createClass({
+        getInitialState: function() {
+          return {likeCount: 0};
+        },
+
+        _up: function() {
+          this.setState({likeCount: this.state.likeCount + 1});
+        },
+
+        _down: function() {
+          this.setState({likeCount: this.state.likeCount - 1});
         },
 
         render: function() {
           return (
-            <div>
-              {this._renderRadioGroup()}
-              Name:<input type="text" ref="name" onKeyUp={this._handleKeyUp} />
+            <div className="row">
+              <Likes count={this.state.likeCount} />
+              <Tool up={this._up} down={this._down} />
               <br />
-              Hello {this.state.name}!
-              <DateWidget initColor={this.state.color} date={this.state.date} />
+              <DateWidget count={this.state.likeCount} />
             </div>
           );
         }
