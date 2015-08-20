@@ -27,7 +27,7 @@
         },
 
         shouldComponentUpdate: function(nextProps, nextState) {
-          return nextProps.count >= 0;
+          return nextProps.count !== 0;
         },
 
         componentWillUnmount: function() {
