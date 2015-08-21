@@ -28,10 +28,10 @@
 
       var NameList = React.createClass({
         render: function() {
-          var createItem = function(name, index) {
+          var createItem = function(item, index) {
             return (
-              <li className="list-group-item" key={index}>
-                <NameItem name={name} />&nbsp;
+              <li className="list-group-item" key={item.id}>
+                <NameItem name={item.name} />&nbsp;
                 <button
                   onClick={this.props.remove.bind(null, index)}
                   className="btn btn-danger">
@@ -76,22 +76,21 @@
 
       var NameBox = React.createClass({
         getInitialState: function() {
-          var nameList = [
-            'Alice',
-            'Bob'
-          ];
-          return {names: nameList};
+          return {names: []};
         },
 
         _addNewName: function(name) {
           // NOTE: NEVER mutate this.state directly
-          var nameList = this.state.names.concat([name]);
+          var nameList = [{
+            name: name,
+            id: _.uniqueId()
+          }].concat(this.state.names);
           this.setState({names: nameList});
         },
 
-        _removeName: function(id) {
+        _removeName: function(index) {
           var nameList = _.clone(this.state.names, true);
-          nameList.splice(id, 1);
+          nameList.splice(index, 1);
           this.setState({names: nameList});
         },
 

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>React Example</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
     <script src="https://fb.me/react-0.13.3.js"></script>
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
   </head>
@@ -24,10 +25,10 @@
 
       var NameList = React.createClass({
         render: function() {
-          var createItem = function(name, index) {
+          var createItem = function(item) {
             return (
-              <li className="list-group-item" key={index}>
-                <NameItem name={name} />
+              <li className="list-group-item" key={item.id}>
+                <NameItem name={item.name} />
               </li>
             );
           };
@@ -46,6 +47,7 @@
           if (!name) {
             return;
           }
+          // pass data back to parent component
           this.props.submitHandler(name);
 
           React.findDOMNode(this.refs.name).value = '';
@@ -64,16 +66,15 @@
 
       var NameBox = React.createClass({
         getInitialState: function() {
-          var nameList = [
-            'Alice',
-            'Bob'
-          ];
-          return {names: nameList};
+          return {names: []};
         },
 
         _addNewName: function(name) {
           // NOTE: NEVER mutate this.state directly
-          var nameList = this.state.names.concat([name]);
+          var nameList = [{
+            name: name,
+            id: _.uniqueId()
+          }].concat(this.state.names);
           this.setState({names: nameList});
         },
 

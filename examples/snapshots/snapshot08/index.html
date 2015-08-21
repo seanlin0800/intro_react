@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>React Example</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
     <script src="https://fb.me/react-0.13.3.js"></script>
     <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
   </head>
@@ -13,27 +14,54 @@
 
     <script type="text/jsx">
       var NameItem = React.createClass({
+        getInitialState: function() {
+          return {
+            isEditing: false,
+            name: this.props.initName
+          }
+        },
+
+        _handleChange: function(e) {
+          this.setState({name: e.target.value});
+        },
+
+        _setEditing: function(value) {
+          this.setState({isEditing: value});
+        },
+
         render: function() {
+          if (this.state.isEditing) {
+            return (
+              <input
+               value={this.state.name}
+               onChange={this._handleChange}
+               onBlur={this._setEditing.bind(null, false)}
+              />
+            );
+          }
           return (
-            <span>
-              {this.props.name}
+            <span onDoubleClick={this._setEditing.bind(null, true)}>
+              {this.state.name}
             </span>
           );
         }
       });
 
       var NameList = React.createClass({
-        render: function() {
-          var createItem = function(name, index) {
-            return (
-              <li className="list-group-item" key={index}>
-                <NameItem name={name} />
-              </li>
-            );
-          };
+        _getItem: function(item) {
+          var key = this.props.useId ? item.id : Math.random();
           return (
-            <ul className="list-group">
-              {this.props.names.map(createItem)}
+            <li className="list-group-item" key={key}>
+              <NameItem initName={item.name} />
+            </li>
+          );
+        },
+
+        render: function() {
+          return (
+            <ul className="list-group col-xs-6 col-md-4">
+              {this.props.useId ? 'Unique Id' : 'Random'}  
+              {this.props.names.map(this._getItem, this)}
             </ul>
           );
         }
@@ -41,17 +69,28 @@
 
       var NameBox = React.createClass({
         getInitialState: function() {
-          var nameList = [
-            'Alice',
-            'Bob'
-          ];
-          return {names: nameList};
+          return {names: []};
+        },
+
+        _add: function() {
+          // NOTE: NEVER mutate this.state directly
+          var nameList = [{
+            name: Math.random().toString(36).substring(2, 5),
+            id: _.uniqueId()
+          }].concat(this.state.names);
+          this.setState({names: nameList});
         },
 
         render: function() {
           return (
             <div className="row">
-              <NameList names={this.state.names} />
+              <button className="btn btn-default" onClick={this._add}>
+                Add item
+              </button>
+              <div>
+                <NameList useId={true} names={this.state.names} />
+                <NameList useId={false} names={this.state.names} />
+              </div>
             </div>
           );
         }
