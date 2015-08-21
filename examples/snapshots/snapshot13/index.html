@@ -56,10 +56,7 @@
 
       var ProjectBox = React.createClass({
         getInitialState: function() {
-          return {
-            projects: [],
-            searchText: ''
-          };
+          return {projects: []};
         },
 
         componentDidMount: function() {
@@ -67,10 +64,10 @@
             url: this.props.url,
             dataType: 'json',
             cache: false
-          }).done(this._onChange);
+          }).done(this._onDone);
         },
 
-        _onChange: function(data) {
+        _onDone: function(data) {
           if (this.isMounted()) {
             this.setState({projects: data});
           }
@@ -78,6 +75,17 @@
 
         _setFilter: function(text) {
           this.setState({searchText: text.trim().toLowerCase()});
+        },
+
+        _renderLoadingBar: function() {
+          if (this.state.projects.length > 0) {
+            return null;
+          }
+          return (
+            <div className="well">
+              Loading...
+            </div>
+          );
         },
 
         render: function() {
@@ -93,6 +101,7 @@
           return (
             <div className="row">
               <Filter changeHandler={this._setFilter} />
+              {this._renderLoadingBar()}
               <ProjectList projects={projects} />
             </div>
           );

@@ -41,18 +41,30 @@
             url: this.props.url,
             dataType: 'json',
             cache: false
-          }).done(this._onChange);
+          }).done(this._onDone);
         },
 
-        _onChange: function(data) {
+        _onDone: function(data) {
           if (this.isMounted()) {
             this.setState({projects: data});
           }
         },
 
+        _renderLoadingBar: function() {
+          if (this.state.projects.length > 0) {
+            return null;
+          }
+          return (
+            <div className="well">
+              Loading...
+            </div>
+          );
+        },
+
         render: function() {
           return (
             <div className="row">
+              {this._renderLoadingBar()}
               <ProjectList projects={this.state.projects} />
             </div>
           );
